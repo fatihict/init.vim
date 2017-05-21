@@ -6,3 +6,4 @@ Steal anything you like and send me a message `@fatihict` on the [Clojurians Sla
 - [ ] Check-in ~/.lein/profiles
 - [ ] Check-in ~/.ctags
 - [ ] Improve this README with a table of functions I need to use/remember
+- [ ] Check-in clojure snippets
