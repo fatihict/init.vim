@@ -56,6 +56,8 @@ nnoremap gj j
 
 nnoremap g_ $
 nnoremap $ g_
+vnoremap g_ $
+vnoremap $ g_
 
 " Highlight removal
 nmap <Leader><space> :nohlsearch<cr>
