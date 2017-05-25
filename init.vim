@@ -10,30 +10,37 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'neovim/node-host'
 Plug 'clojure-vim/async-clj-omni'
 Plug 'vim-syntastic/syntastic'
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips' | Plug 'fatihict/vim-snippets'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-fugitive'
 Plug 'bronson/vim-visual-star-search'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'dhruvasagar/vim-table-mode'
+Plug 'christoomey/vim-tmux-navigator'
 
 " Clojure (<3)
 " Plug 'clojure-vim/acid.nvim' " Alternative to vim-fireplace, should try this
 " sometime..
 Plug 'tpope/vim-fireplace'
 Plug 'guns/vim-clojure-highlight'
+Plug 'guns/vim-clojure-static'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'guns/vim-sexp'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
 Plug 'tpope/vim-classpath'
 " Plug 'clojure-vim/clj-refactor.nvim' " Need to configure
 Plug 'vim-scripts/paredit.vim'
 Plug 'jonase/eastwood'
-Plug 'majutsushi/tagbar'
+Plug 'fatihict/tagbar'
+
+" Experimental plugins
+Plug 'clojure-vim/neovim-client'
 
 call plug#end()
 
 
 let mapleader = ','
+let maplocalleader = '\'
 
 " If the window is small and a line is wrapped I usually want to go to the first character of the current visible line instead of the actual line.
 nnoremap 0 g0
@@ -52,7 +59,7 @@ nmap <Leader><space> :nohlsearch<cr>
 
 " Quick save
 " nmap ,w :w<cr> " Is mapped to another keybinding
-nmap ,fs :w<cr>
+nmap <Leader>fs :w<cr>
 
 " select the pasted block
 nnoremap gp `[v`]
@@ -61,17 +68,17 @@ nnoremap gp `[v`]
 noremap \ ,
 
 " Navigation
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+" nnoremap <C-h> <C-w>h
+" nnoremap <C-j> <C-w>j
+" nnoremap <C-k> <C-w>k
+" nnoremap <C-l> <C-w>l
 
 " Best of both worlds
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 
 " Easy escape
-imap jj <esc>
+imap kj <esc>
 
 " Go to the bottom of a yanked selection, because that is what you want!
 vmap y y`]
@@ -147,10 +154,13 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+nmap <Leader>bb :Buffers<CR>
+nmap <Leader>p :Tags<CR>
 nmap <Leader>l :BLines<CR>
 nmap <C-e> :History<CR>
-nnoremap <Leader>s :GFiles<CR>
+nmap <Leader>s :GFiles<CR>
 nmap <Leader>/ :History/<CR>
+nmap <Leader>: :History:<CR>
 
 nmap <Leader>tb :Tagbar<CR>
 nmap <Leader>bt :BTags<CR>
@@ -175,6 +185,12 @@ nnoremap bj  :bn<CR>
 nnoremap bk  :bp<CR>
 nnoremap bn  :bn<CR>
 nnoremap bp  :bp<CR>
+
+" Visual mode eval range
+vmap <Leader>e :'<,'>Eval<CR>
+
+" Source init.vim from existing buffers
+nnoremap <Leader>sv :source ~/.config/nvim/init.vim<cr>
 
 hi MatchParen guifg=#1aff1a guibg=none
 
@@ -211,3 +227,29 @@ let g:clojure_special_indent_words = join([
             \ 'defrecord', 'defui', 'reify', 'letfn', 'extend-type',
             \ 'defprotocol', 'defmutation',
             \ ], ',')
+
+" Markdown-compatible tables
+let g:table_mode_corner='|'
+
+function! s:isAtStartOfLine(mapping)
+  let text_before_cursor = getline('.')[0 : col('.')-1]
+  let mapping_pattern = '\V' . escape(a:mapping, '\')
+  let comment_pattern = '\V' . escape(substitute(&l:commentstring, '%s.*$', '', ''), '\')
+  return (text_before_cursor =~? '^' . ('\v(' . comment_pattern . '\v)?') . '\s*\v' . mapping_pattern . '\v$')
+endfunction
+
+inoreabbrev <expr> <bar><bar>
+          \ <SID>isAtStartOfLine('\|\|') ?
+          \ '<c-o>:TableModeEnable<cr><bar><space><bar><left><left>' : '<bar><bar>'
+inoreabbrev <expr> __
+          \ <SID>isAtStartOfLine('__') ?
+          \ '<c-o>:silent! TableModeDisable<cr>' : '__'
+
+" Navigate between vim and tmux seamlessly
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
+" nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
