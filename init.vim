@@ -258,3 +258,9 @@ nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
 " nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
+
+" Vimscript stuff for quick sourcing
+nmap ,e :w<cr>:so %<cr>
+nmap ,m :mess<cr>
+
+set expandtab
