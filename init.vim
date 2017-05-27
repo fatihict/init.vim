@@ -32,6 +32,7 @@ Plug 'tpope/vim-classpath'
 Plug 'vim-scripts/paredit.vim'
 Plug 'jonase/eastwood'
 Plug 'fatihict/tagbar'
+Plug '~/Code/vimhardway/potion.vim'
 
 " Experimental plugins
 Plug 'clojure-vim/neovim-client'
@@ -85,8 +86,8 @@ cnoremap <C-n> <Down>
 " Easy escape
 imap kj <esc>
 
-" Go to the bottom of a yanked selection, because that is what you want!
-vmap y y`]
+" go to the bottom of a yanked selection, because that is what you want!
+vmap y y`]j
 
 " Automatically source this config on save
 augroup autosourcing
@@ -263,4 +264,20 @@ nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
 nmap ,e :w<cr>:so %<cr>
 nmap ,m :mess<cr>
 
+" Tabs and spaces
+set tabstop=4
 set expandtab
+set softtabstop=4
+set shiftwidth=4
+set smartindent
+set autoindent
+set copyindent
+set indentexpr&
+
+" I don't use folds.. So unfold all the things!
+set foldlevel=99
+set history=800
+
+" Because i fail at letting go shift after writing a colon
+abbrev Wq wq
+
