@@ -195,9 +195,6 @@ nnoremap bp  :bp<CR>
 " Visual mode eval range
 vmap <Leader>e :'<,'>Eval<CR>
 
-" Source init.vim from existing buffers
-nnoremap <Leader>sv :source ~/.config/nvim/init.vim<cr>
-
 hi MatchParen guifg=#1aff1a guibg=none
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -281,3 +278,12 @@ set history=800
 " Because i fail at letting go shift after writing a colon
 abbrev Wq wq
 
+" Easy source changes to vimrc
+nnoremap <Leader>qs :so ~/.config/nvim/init.vim<CR> :echo "Sourced new vimrc :)"<CR>
+
+" Removes a namespaced symbol
+nmap dns 0f/ldt<space>
+nmap dns 0f/ldt<space><CR>
+    \ :call repeat#set("dns")<CR>
+
+nmap cns <Esc>0f/ldt<space>i
