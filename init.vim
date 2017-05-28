@@ -18,6 +18,7 @@ Plug 'tpope/vim-surround'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'fatihict/tagbar'
+Plug 'airblade/vim-gitgutter'
 
 " Clojure (<3)
 " Plug 'clojure-vim/acid.nvim' " Alternative to vim-fireplace, should try this
@@ -161,7 +162,6 @@ function! GitBranchName()
     return ''
 endfunction
 
-hi StatusLine guibg=none
 set statusline=
 set statusline+=%=
 set statusline+=%-10{GitBranchName()}
@@ -296,3 +296,6 @@ nnoremap <Leader>qs :so ~/.config/nvim/init.vim<CR> :echo "Sourced new vimrc :)"
 nmap dns 0f/ldt<space><CR>
     \ :call repeat#set("dns")<CR>
 nmap cns <Esc>0f/ldt<space>i
+
+hi SignColumn guibg=none
+hi GitGutterAdd guibg=none

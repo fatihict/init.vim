@@ -7,8 +7,6 @@ Steal anything you like and send me a message `@fatihict` on the [Clojurians Sla
 - [X] Check-in ~/.ctags
 - [X] Improve this README with a table of functions I need to use/remember
 - [X] Check-in clojure snippets
-- [ ] Highlight variables under cursor without `*` search
-- [ ] Fix issue with Ag being scope on current dir
 
 ## To remember
 
