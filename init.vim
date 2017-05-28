@@ -299,3 +299,6 @@ nmap cns <Esc>0f/ldt<space>i
 
 hi SignColumn guibg=none
 hi GitGutterAdd guibg=none
+hi GitGutterChange guibg=none
+hi GitGutterDelete guibg=none
+hi GitGutterChangeDelete guibg=none
