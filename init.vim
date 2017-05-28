@@ -152,6 +152,19 @@ let g:deoplete#keyword_patterns.clojure = '[\w!$%&*+/:<=>?@\^_~\-\.#]*'
 " set statusline+=%#warningmsg#
 " set statusline+=%{SyntasticStatuslineFlag()}
 " set statusline+=%*
+"
+function! GitBranchName()
+    let branch = fugitive#head()
+    if branch != ''
+        return ' ' . branch
+    endif
+    return ''
+endfunction
+
+hi StatusLine guibg=none
+set statusline=
+set statusline+=%=
+set statusline+=%-10{GitBranchName()}
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
