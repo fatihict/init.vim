@@ -7,7 +7,6 @@ Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-commentary'
 Plug 'mhartington/oceanic-next'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'neovim/node-host'
 Plug 'clojure-vim/async-clj-omni'
 Plug 'vim-syntastic/syntastic'
 Plug 'SirVer/ultisnips' | Plug 'fatihict/vim-snippets'
@@ -18,6 +17,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'fatihict/tagbar'
 
 " Clojure (<3)
 " Plug 'clojure-vim/acid.nvim' " Alternative to vim-fireplace, should try this
@@ -25,14 +25,12 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-fireplace'
 Plug 'guns/vim-clojure-highlight'
 Plug 'guns/vim-clojure-static'
-Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'guns/vim-sexp'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'tpope/vim-classpath'
-" Plug 'clojure-vim/clj-refactor.nvim' " Need to configure
-Plug 'vim-scripts/paredit.vim'
+Plug 'neovim/node-host', { 'dir': '~/.vim/plugged/node-host', 'do': 'npm install' }
+Plug 'clojure-vim/clj-refactor.nvim'
 Plug 'jonase/eastwood'
-Plug 'fatihict/tagbar'
-Plug '~/Code/vimhardway/potion.vim'
 
 " Experimental plugins
 Plug 'clojure-vim/neovim-client'
@@ -284,5 +282,4 @@ nnoremap <Leader>qs :so ~/.config/nvim/init.vim<CR> :echo "Sourced new vimrc :)"
 " Removes a namespaced symbol
 nmap dns 0f/ldt<space><CR>
     \ :call repeat#set("dns")<CR>
-
 nmap cns <Esc>0f/ldt<space>i
