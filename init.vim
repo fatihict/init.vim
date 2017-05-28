@@ -19,6 +19,8 @@ Plug 'dhruvasagar/vim-table-mode'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'fatihict/tagbar'
 Plug 'airblade/vim-gitgutter'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-endwise'
 
 " Clojure (<3)
 " Plug 'clojure-vim/acid.nvim' " Alternative to vim-fireplace, should try this
@@ -90,8 +92,8 @@ vmap y y`]j
 
 " Automatically source this config on save
 augroup autosourcing
-autocmd!
-autocmd BufWritePost ~/.config/nvim/init.vim source %
+    autocmd!
+    autocmd BufWritePost ~/.config/nvim/init.vim source %
 augroup end
 
 " Visual
@@ -297,8 +299,12 @@ nmap dns 0f/ldt<space><CR>
     \ :call repeat#set("dns")<CR>
 nmap cns <Esc>0f/ldt<space>i
 
+" Doesn't work on buffers except this one? Have to investigate..
+hi LineNr guibg=none
 hi SignColumn guibg=none
 hi GitGutterAdd guibg=none
 hi GitGutterChange guibg=none
 hi GitGutterDelete guibg=none
 hi GitGutterChangeDelete guibg=none
+
+let g:multi_cursor_exit_from_insert_mode = 0
