@@ -130,7 +130,7 @@ nmap <C-p><C-i> :PlugInstall<cr>
 nmap <C-p><C-d> :PlugClean<cr>
 
 " Toggle line numbers
-nmap <C-N><C-N> :set invnumber<CR>
+nmap <C-P><C-P> :set invnumber<CR>
 
 set autowriteall
 set ignorecase
