@@ -15,7 +15,7 @@
 --langdef=Clojure
 --langmap=Clojure:.clj.cljs
 --regex-clojure=/\([ \t]*create-ns[ \t]+([-[:alnum:]*+!_><:\/.?]+)/\1/n,namespace/
---regex-clojure=/\([ \t]*def[ \t]+([\^:[:alnum:]]+)\ ([-[:alnum:]*+!_><:\/.?]+)/\2/d,define/
+--regex-clojure=/\([ \t]*def[ \t]+([-[:alnum:]*+!_><:\/.?]+)/\1/d,define/
 --regex-clojure=/\([ \t]*defui[ \t]+([\^:[:alnum:]]+)\ ([-[:alnum:]*+!_><:\/.?]+)/\2/u,defui/
 --regex-clojure=/\([ \t]*defn-?[ \t]+([-[:alnum:]*+!_><:\/.?]+)/\1/f,function/
 --regex-clojure=/\([ \t]*defmacro[ \t]+([-[:alnum:]*+!_><:\/.?]+)/\1/m,macro/

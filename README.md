@@ -7,6 +7,7 @@ Steal anything you like and send me a message `@fatihict` on the [Clojurians Sla
 - [X] Check-in ~/.ctags
 - [X] Improve this README with a table of functions I need to use/remember
 - [X] Check-in clojure snippets
+- [ ] Fix regex for defines etc.. To check for optional meta data, defines without meta data are currently not recognized
 
 ## To remember
 
