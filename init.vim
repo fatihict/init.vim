@@ -313,6 +313,9 @@ set guicursor=
 
 unmap <cr><cr>
 
+nmap n nzz
+nmap N Nzz
+
 nmap <Leader>a :AgClean 
 nmap <Leader><Leader>a yiw:AgClean <C-r>+<cr>
 nmap <Leader><Leader>ca :AgClj 
