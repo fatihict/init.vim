@@ -164,7 +164,7 @@ function! GitBranchName()
     return ''
 endfunction
 
-set statusline=
+set statusline=%t\ %m
 set statusline+=%=
 set statusline+=%-10{GitBranchName()}
 
@@ -308,3 +308,18 @@ hi GitGutterDelete guibg=none
 hi GitGutterChangeDelete guibg=none
 
 let g:multi_cursor_exit_from_insert_mode = 0
+
+set guicursor=
+
+unmap <cr><cr>
+
+nmap <Leader>a :AgClean 
+nmap <Leader><Leader>a yiw:AgClean <C-r>+<cr>
+nmap <Leader><Leader>ca :AgClj 
+nmap <Leader><Leader>cca :AgCljc 
+nmap <Leader><Leader>csa :AgCljs 
+
+command! -bang -nargs=* AgClean call fzf#vim#grep('ag --nogroup --column --color --color-path "49;91" --color-line-number "40;35" --color-match "49;91" --ignore-dir="*.less" --ignore-dir="*.js" ' . shellescape(<q-args>), 1, <bang>0)
+command! -bang -nargs=* AgClj call fzf#vim#grep('ag --nogroup --column --color --color-path "49;91" --color-line-number "40;35" --color-match "49;91" -G ".clj$" ' . shellescape(<q-args>), 1, <bang>0)
+command! -bang -nargs=* AgCljs call fzf#vim#grep('ag --nogroup --column --color --color-path "49;91" --color-line-number "40;35" --color-match "49;91" -G ".cljs$" ' . shellescape(<q-args>), 1, <bang>0)
+command! -bang -nargs=* AgCljc call fzf#vim#grep('ag --nogroup --column --color --color-path "49;91" --color-line-number "40;35" --color-match "49;91" -G ".cljc$" ' . shellescape(<q-args>), 1, <bang>0)
