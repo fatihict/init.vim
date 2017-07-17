@@ -130,7 +130,7 @@ nmap <C-p><C-i> :PlugInstall<cr>
 nmap <C-p><C-d> :PlugClean<cr>
 
 " Toggle line numbers
-nmap <C-m><C-m> :set invnumber<CR>
+nmap <C-l><C-l> :set invnumber<CR>
 
 set autowriteall
 set ignorecase
@@ -164,7 +164,7 @@ function! GitBranchName()
     return ''
 endfunction
 
-set statusline=%t\ %m
+set statusline=%f\ %m
 set statusline+=%=
 set statusline+=%-10{GitBranchName()}
 
@@ -310,8 +310,6 @@ hi GitGutterChangeDelete guibg=none
 let g:multi_cursor_exit_from_insert_mode = 0
 
 set guicursor=
-
-unmap <cr><cr>
 
 nmap n nzz
 nmap N Nzz
