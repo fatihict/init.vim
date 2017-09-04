@@ -21,6 +21,7 @@ Plug 'fatihict/tagbar'
 Plug 'airblade/vim-gitgutter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-endwise'
+Plug 'neovim/node-host', { 'dir': '~/.vim/plugged/node-host', 'do': 'npm install' }
 
 " Clojure (<3)
 " Plug 'clojure-vim/acid.nvim' " Alternative to vim-fireplace, should try this
@@ -30,16 +31,22 @@ Plug 'guns/vim-clojure-highlight'
 Plug 'guns/vim-clojure-static'
 Plug 'guns/vim-sexp'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
-Plug 'tpope/vim-classpath'
-Plug 'neovim/node-host', { 'dir': '~/.vim/plugged/node-host', 'do': 'npm install' }
+" Plug 'tpope/vim-classpath'
 Plug 'clojure-vim/clj-refactor.nvim'
 Plug 'jonase/eastwood'
+" Plug 'eugen0329/vim-esearch' " Global search & replace
 
 " Experimental plugins
-Plug 'clojure-vim/neovim-client'
+" Plug 'clojure-vim/neovim-client'
+
+" Elm
+Plug 'ElmCast/elm-vim'
+let g:elm_format_autosave = 1
 
 call plug#end()
 
+" disable elm-vim mappings
+let g:elm_setup_keybindings = 0
 
 let mapleader = ','
 let maplocalleader = '\'
@@ -130,7 +137,7 @@ nmap <C-p><C-i> :PlugInstall<cr>
 nmap <C-p><C-d> :PlugClean<cr>
 
 " Toggle line numbers
-nmap <C-l><C-l> :set invnumber<CR>
+" nmap <C-l><C-l> :set invnumber<CR>
 
 set autowriteall
 set ignorecase
