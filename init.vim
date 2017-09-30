@@ -22,19 +22,19 @@ Plug 'airblade/vim-gitgutter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-endwise'
 Plug 'neovim/node-host', { 'dir': '~/.vim/plugged/node-host', 'do': 'npm install' }
+" Plug 'eugen0329/vim-esearch' " Global search & replace
 
 " Clojure (<3)
-" Plug 'clojure-vim/acid.nvim' " Alternative to vim-fireplace, should try this
-" sometime..
 Plug 'tpope/vim-fireplace'
 Plug 'guns/vim-clojure-highlight'
 Plug 'guns/vim-clojure-static'
 Plug 'guns/vim-sexp'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
-" Plug 'tpope/vim-classpath'
 Plug 'clojure-vim/clj-refactor.nvim'
 Plug 'jonase/eastwood'
-" Plug 'eugen0329/vim-esearch' " Global search & replace
+
+" Plug 'tpope/vim-classpath'
+" Plug 'clojure-vim/acid.nvim' " Alternative to vim-fireplace, should try this sometime..
 
 " Experimental plugins
 " Plug 'clojure-vim/neovim-client'
@@ -227,29 +227,12 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 " Stole this from: https://github.com/Pancia/dotfiles/blob/master/nvim/ftplugin/clojure.vim
 let g:clojure_maxlines=300
 let g:clojure_align_multiline_strings=1
-let g:clojure_syntax_keywords = {
-            \ 'clojureMacro': ['defui', 'facts', 'fact', 'specification', 'behavior', 'provided', 'assertions', 'component', 'provided', 'when-mocking', 'render', 'query', 'ident', 'start', 'stop', 'defsyntax', 'defsynfn', 'synfn', 'defspawner', 'defread', 'defmutation']
-            \ }
+let g:clojure_syntax_keywords = { 'clojureMacro': ['defui', 'facts', 'fact', 'specification', 'behavior', 'provided', 'assertions', 'component', 'provided', 'when-mocking', 'render', 'query', 'ident', 'start', 'stop', 'defsyntax', 'defsynfn', 'synfn', 'defspawner', 'defread', 'defmutation'] }
 
 let g:clojure_fuzzy_indent = 1
-let g:clojure_fuzzy_indent_patterns = [
-            \ '^def.*', '^with.*', 'specification', 'behavior', 'assertions', 'component', 'provided',
-            \ 'start', 'stop', 'letfn', '-tx$', 'transact!', '^check.*', '^assert.*',
-            \ 'concat', '.*Exception.*', '.*Error.*', 'trace\|debug\|info\|warn\|error\|fatal',
-            \ '.*->>\?$', 'either', 'synfn', 'parse.*', 'spawn-*', 'load-data.*',
-            \ '!$', '^do', 'into', '^test-.*', '\..*', 'ui-*',
-            \ 'a', 'article', 'button', 'code', 'defs', 'div', 'footer', 'form',
-            \ 'h1', 'h2', 'h4', 'header', 'hr', 'img', 'input', 'label', 'li', 'linearGradient',
-            \ 'main', 'nav', 'node', 'ol', 'option', 'p', 'path', 'polygon',
-            \ 'section', 'select', 'small', 'span', 'stop', 'strong', 'svg',
-            \ 'table', 'tbody', 'td', 'textarea', 'th', 'thead', 'tr', 'ul',
-            \ 'fdef', 'reduce', 'merge', 'row', 'col', 'icon',
-            \ ]
+let g:clojure_fuzzy_indent_patterns = [ '^def.*', '^with.*', 'specification', 'behavior', 'assertions', 'component', 'provided', 'start', 'stop', 'letfn', '-tx$', 'transact!', '^check.*', '^assert.*', 'concat', '.*Exception.*', '.*Error.*', 'trace\|debug\|info\|warn\|error\|fatal', '.*->>\?$', 'either', 'synfn', 'parse.*', 'spawn-*', 'load-data.*', '!$', '^do', 'into', '^test-.*', '\..*', 'ui-*', 'a', 'article', 'button', 'code', 'defs', 'div', 'footer', 'form', 'h1', 'h2', 'h4', 'header', 'hr', 'img', 'input', 'label', 'li', 'linearGradient', 'main', 'nav', 'node', 'ol', 'option', 'p', 'path', 'polygon', 'section', 'select', 'small', 'span', 'stop', 'strong', 'svg', 'table', 'tbody', 'td', 'textarea', 'th', 'thead', 'tr', 'ul', 'fdef', 'reduce', 'merge', 'row', 'col', 'icon', ]
 let g:clojure_fuzzy_indent_blacklist = []
-let g:clojure_special_indent_words = join([
-            \ 'defrecord', 'defui', 'reify', 'letfn', 'extend-type',
-            \ 'defprotocol', 'defmutation',
-            \ ], ',')
+let g:clojure_special_indent_words = join([ 'defrecord', 'defui', 'reify', 'letfn', 'extend-type', 'defprotocol', 'defmutation', ], ',')
 
 " Markdown-compatible tables
 let g:table_mode_corner='|'
@@ -261,12 +244,8 @@ function! s:isAtStartOfLine(mapping)
   return (text_before_cursor =~? '^' . ('\v(' . comment_pattern . '\v)?') . '\s*\v' . mapping_pattern . '\v$')
 endfunction
 
-inoreabbrev <expr> <bar><bar>
-          \ <SID>isAtStartOfLine('\|\|') ?
-          \ '<c-o>:TableModeEnable<cr><bar><space><bar><left><left>' : '<bar><bar>'
-inoreabbrev <expr> __
-          \ <SID>isAtStartOfLine('__') ?
-          \ '<c-o>:silent! TableModeDisable<cr>' : '__'
+inoreabbrev <expr> <bar><bar> <SID>isAtStartOfLine('\|\|') ? '<c-o>:TableModeEnable<cr><bar><space><bar><left><left>' : '<bar><bar>'
+inoreabbrev <expr> __ <SID>isAtStartOfLine('__') ? '<c-o>:silent! TableModeDisable<cr>' : '__'
 
 " Navigate between vim and tmux seamlessly
 let g:tmux_navigator_no_mappings = 1
@@ -302,8 +281,7 @@ abbrev Wq wq
 nnoremap <Leader>qs :so ~/.config/nvim/init.vim<CR> :echo "Sourced new vimrc :)"<CR>
 
 " Removes a namespaced symbol
-nmap dns 0f/ldt<space><CR>
-    \ :call repeat#set("dns")<CR>
+nmap dns 0f/ldt<space><CR> :call repeat#set("dns")<CR>
 nmap cns <Esc>0f/ldt<space>i
 
 " Doesn't work on buffers except this one? Have to investigate..
@@ -331,3 +309,7 @@ command! -bang -nargs=* AgClean call fzf#vim#grep('ag --nogroup --column --color
 command! -bang -nargs=* AgClj call fzf#vim#grep('ag --nogroup --column --color --color-path "49;91" --color-line-number "40;35" --color-match "49;91" -G ".clj$" ' . shellescape(<q-args>), 1, <bang>0)
 command! -bang -nargs=* AgCljs call fzf#vim#grep('ag --nogroup --column --color --color-path "49;91" --color-line-number "40;35" --color-match "49;91" -G ".cljs$" ' . shellescape(<q-args>), 1, <bang>0)
 command! -bang -nargs=* AgCljc call fzf#vim#grep('ag --nogroup --column --color --color-path "49;91" --color-line-number "40;35" --color-match "49;91" -G ".cljc$" ' . shellescape(<q-args>), 1, <bang>0)
+
+" ClojureScript
+nmap <Leader>pi :Piggieback (figwheel-sidecar.repl-api/repl-env)<cr>
+nmap <Leader>pas :Eval(cljs.user/app-state)<cr>
