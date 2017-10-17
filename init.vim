@@ -33,7 +33,6 @@ Plug 'guns/vim-sexp'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'clojure-vim/clj-refactor.nvim'
 Plug 'jonase/eastwood'
-Plug 'kien/rainbow_parentheses.vim'
 
 " Plug 'tpope/vim-classpath'
 " Plug 'clojure-vim/acid.nvim' " Alternative to vim-fireplace, should try this sometime..
