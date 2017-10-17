@@ -23,6 +23,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-endwise'
 Plug 'neovim/node-host', { 'dir': '~/.vim/plugged/node-host', 'do': 'npm install' }
 " Plug 'eugen0329/vim-esearch' " Global search & replace
+Plug 'benmills/vimux'
 
 " Clojure (<3)
 Plug 'tpope/vim-fireplace'
@@ -32,6 +33,7 @@ Plug 'guns/vim-sexp'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'clojure-vim/clj-refactor.nvim'
 Plug 'jonase/eastwood'
+Plug 'kien/rainbow_parentheses.vim'
 
 " Plug 'tpope/vim-classpath'
 " Plug 'clojure-vim/acid.nvim' " Alternative to vim-fireplace, should try this sometime..
@@ -313,3 +315,7 @@ command! -bang -nargs=* AgCljc call fzf#vim#grep('ag --nogroup --column --color 
 " ClojureScript
 nmap <Leader>pi :Piggieback (figwheel-sidecar.repl-api/repl-env)<cr>
 nmap <Leader>pas :Eval(cljs.user/app-state)<cr>
+nmap <Leader>o (%i<cr>
+
+nmap <Leader>hn :GitGutterNextHunk<cr>
+nmap <Leader>hp :GitGutterPrevHunk<cr>
