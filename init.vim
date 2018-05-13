@@ -8,7 +8,6 @@ Plug 'tpope/vim-commentary'
 Plug 'mhartington/oceanic-next'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'clojure-vim/async-clj-omni'
-Plug 'vim-syntastic/syntastic'
 Plug 'SirVer/ultisnips' | Plug 'fatihict/vim-snippets'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-fugitive'
@@ -24,30 +23,21 @@ Plug 'tpope/vim-endwise'
 Plug 'neovim/node-host', { 'dir': '~/.vim/plugged/node-host', 'do': 'npm install' }
 " Plug 'eugen0329/vim-esearch' " Global search & replace
 Plug 'benmills/vimux'
+Plug 'tpope/vim-abolish'
+Plug 'romgrk/replace.vim'
+Plug 'radenling/vim-dispatch-neovim'
 
 " Clojure (<3)
+Plug 'SevereOverfl0w/vim-replant', { 'do': ':UpdateRemotePlugins' }
 Plug 'tpope/vim-fireplace'
-Plug 'guns/vim-clojure-highlight'
 Plug 'guns/vim-clojure-static'
+Plug 'guns/vim-clojure-highlight'
 Plug 'guns/vim-sexp'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
-Plug 'clojure-vim/clj-refactor.nvim'
-Plug 'jonase/eastwood'
-
-" Plug 'tpope/vim-classpath'
-" Plug 'clojure-vim/acid.nvim' " Alternative to vim-fireplace, should try this sometime..
-
-" Experimental plugins
-" Plug 'clojure-vim/neovim-client'
-
-" Elm
-Plug 'ElmCast/elm-vim'
-let g:elm_format_autosave = 1
+Plug 'clojure-vim/clj-refactor.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'clojure-vim/vim-jack-in'
 
 call plug#end()
-
-" disable elm-vim mappings
-let g:elm_setup_keybindings = 0
 
 let mapleader = ','
 let maplocalleader = '\'
@@ -70,7 +60,7 @@ vnoremap g_ $
 vnoremap $ g_
 
 " Highlight removal
-nmap <Leader><space> :nohlsearch<cr>
+nmap <Leader><space> :nohlsearch<cr>:redraw!<cr>
 
 " Quick save
 " nmap ,w :w<cr> " Is mapped to another keybinding
@@ -160,10 +150,6 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#keyword_patterns = {}
 let g:deoplete#keyword_patterns.clojure = '[\w!$%&*+/:<=>?@\^_~\-\.#]*'
 
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-"
 function! GitBranchName()
     let branch = fugitive#head()
     if branch != ''
@@ -175,11 +161,6 @@ endfunction
 set statusline=%f\ %m
 set statusline+=%=
 set statusline+=%-10{GitBranchName()}
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
 
 nmap <Leader>bb :Buffers<CR>
 nmap <Leader>p :Tags<CR>
@@ -216,7 +197,7 @@ nnoremap bp  :bp<CR>
 " Visual mode eval range
 vmap <Leader>e :'<,'>Eval<CR>
 
-hi MatchParen guifg=#1aff1a guibg=none
+hi MatchParen guifg=#1aff1a guibg=NONE
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 " let g:UltiSnipsSnippetsDir = "~/.vim/bundle/ultisnips/UltiSnips"
@@ -228,10 +209,14 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 " Stole this from: https://github.com/Pancia/dotfiles/blob/master/nvim/ftplugin/clojure.vim
 let g:clojure_maxlines=300
 let g:clojure_align_multiline_strings=1
-let g:clojure_syntax_keywords = { 'clojureMacro': ['defui', 'facts', 'fact', 'specification', 'behavior', 'provided', 'assertions', 'component', 'provided', 'when-mocking', 'render', 'query', 'ident', 'start', 'stop', 'defsyntax', 'defsynfn', 'synfn', 'defspawner', 'defread', 'defmutation'] }
+let g:clojure_syntax_keywords = { 'clojureMacro': ['defui', 'facts', 'fact', 'specification', 'behavior', 'provided', 'assertions', 'provided', 'when-mocking', 'render', 'query', 'ident', 'start', 'stop', 'defsyntax', 'defsynfn', 'synfn', 'defspawner', 'defread', 'defmutation', 'defsc', 'defcard-fulcro', 'createFactory']
+                              \ , 'clojureFunc': ['helpers/root', 'prim/get-initial-state', 'prim/get-query', 'prim/computed', 'prim/transact!', 'utils/view->dom-style', 'prim/factory', 'clj->js', 'prim/children', 'dom/a', 'dom/article', 'dom/button', 'dom/code', 'dom/defs', 'dom/div', 'dom/footer', 'dom/form', 'dom/h1', 'dom/h2', 'dom/h4', 'dom/header', 'dom/hr', 'dom/img', 'dom/input', 'dom/label', 'dom/li', 'dom/linearGradient', 'dom/main', 'dom/nav', 'dom/node', 'dom/ol', 'dom/option', 'dom/p', 'dom/path', 'dom/polygon', 'dom/section', 'dom/select', 'dom/small', 'dom/span', 'dom/stop', 'dom/strong', 'dom/svg', 'dom/table', 'dom/tbody', 'dom/td', 'dom/textarea', 'dom/th', 'dom/thead', 'dom/tr', 'dom/ul', 'dom/fdef', 'dom/reduce', 'dom/merge', 'dom/row', 'dom/col', 'dom/icon', 'dom/colgroup']
+                              \ , 'clojureConstant': ['this']
+                              \ , 'clojureRepeat': ['js', '^.+Table.*']
+                              \ }
 
 let g:clojure_fuzzy_indent = 1
-let g:clojure_fuzzy_indent_patterns = [ '^def.*', '^with.*', 'specification', 'behavior', 'assertions', 'component', 'provided', 'start', 'stop', 'letfn', '-tx$', 'transact!', '^check.*', '^assert.*', 'concat', '.*Exception.*', '.*Error.*', 'trace\|debug\|info\|warn\|error\|fatal', '.*->>\?$', 'either', 'synfn', 'parse.*', 'spawn-*', 'load-data.*', '!$', '^do', 'into', '^test-.*', '\..*', 'ui-*', 'a', 'article', 'button', 'code', 'defs', 'div', 'footer', 'form', 'h1', 'h2', 'h4', 'header', 'hr', 'img', 'input', 'label', 'li', 'linearGradient', 'main', 'nav', 'node', 'ol', 'option', 'p', 'path', 'polygon', 'section', 'select', 'small', 'span', 'stop', 'strong', 'svg', 'table', 'tbody', 'td', 'textarea', 'th', 'thead', 'tr', 'ul', 'fdef', 'reduce', 'merge', 'row', 'col', 'icon', ]
+let g:clojure_fuzzy_indent_patterns = [ '^def.*', '^with.*', 'specification', 'behavior', 'assertions', 'component', 'provided', 'start', 'stop', 'letfn', '-tx$', 'transact!', '^check.*', '^assert.*', 'concat', '.*Exception.*', '.*Error.*', 'trace\|debug\|info\|warn\|error\|fatal', '.*->>\?$', 'either', 'synfn', 'parse.*', 'spawn-*', 'load-data.*', '!$', '^do', 'into', '^test-.*', '\..*', 'ui-*', 'a', 'article', 'button', 'code', 'defs', 'div', 'footer', 'form', 'h1', 'h2', 'h4', 'header', 'hr', 'img', 'input', 'label', 'li', 'linearGradient', 'main', 'nav', 'node', 'ol', 'option', 'p', 'path', 'polygon', 'section', 'select', 'small', 'span', 'stop', 'strong', 'svg', 'table', 'tbody', 'td', 'textarea', 'th', 'thead', 'tr', 'ul', 'fdef', 'reduce', 'merge', 'row', 'col', 'icon']
 let g:clojure_fuzzy_indent_blacklist = []
 let g:clojure_special_indent_words = join([ 'defrecord', 'defui', 'reify', 'letfn', 'extend-type', 'defprotocol', 'defmutation', ], ',')
 
@@ -286,12 +271,12 @@ nmap dns 0f/ldt<space><CR> :call repeat#set("dns")<CR>
 nmap cns <Esc>0f/ldt<space>i
 
 " Doesn't work on buffers except this one? Have to investigate..
-hi LineNr guibg=none
-hi SignColumn guibg=none
-hi GitGutterAdd guibg=none
-hi GitGutterChange guibg=none
-hi GitGutterDelete guibg=none
-hi GitGutterChangeDelete guibg=none
+hi LineNr guibg=NONE
+hi SignColumn guibg=NONE
+hi GitGutterAdd guibg=NONE
+hi GitGutterChange guibg=NONE
+hi GitGutterDelete guibg=NONE
+hi GitGutterChangeDelete guibg=NONE
 
 let g:multi_cursor_exit_from_insert_mode = 0
 
@@ -306,7 +291,7 @@ nmap <Leader><Leader>ca :AgClj
 nmap <Leader><Leader>cca :AgCljc 
 nmap <Leader><Leader>csa :AgCljs 
 
-command! -bang -nargs=* AgClean call fzf#vim#grep('ag --nogroup --column --color --color-path "49;91" --color-line-number "40;35" --color-match "49;91" --ignore-dir="*.less" --ignore-dir="*.js" ' . shellescape(<q-args>), 1, <bang>0)
+command! -bang -nargs=* AgClean call fzf#vim#grep('ag --nogroup --column --color --color-path "49;91" --color-line-number "40;35" --color-match "49;91" --ignore-dir="*.less" --ignore-dir="*.js"k--ignore-dir="*.json" ' . shellescape(<q-args>), 1, <bang>0)
 command! -bang -nargs=* AgClj call fzf#vim#grep('ag --nogroup --column --color --color-path "49;91" --color-line-number "40;35" --color-match "49;91" -G ".clj$" ' . shellescape(<q-args>), 1, <bang>0)
 command! -bang -nargs=* AgCljs call fzf#vim#grep('ag --nogroup --column --color --color-path "49;91" --color-line-number "40;35" --color-match "49;91" -G ".cljs$" ' . shellescape(<q-args>), 1, <bang>0)
 command! -bang -nargs=* AgCljc call fzf#vim#grep('ag --nogroup --column --color --color-path "49;91" --color-line-number "40;35" --color-match "49;91" -G ".cljc$" ' . shellescape(<q-args>), 1, <bang>0)
@@ -318,3 +303,10 @@ nmap <Leader>o (%i<cr>
 
 nmap <Leader>hn :GitGutterNextHunk<cr>
 nmap <Leader>hp :GitGutterPrevHunk<cr>
+
+set number
+
+set updatetime=100
+
+nmap <Leader>ff :FZF<cr>
+nmap <LocalLeader>q :ReplantApropos --project --private<cr>
