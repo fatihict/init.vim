@@ -20,8 +20,8 @@ Plug 'fatihict/tagbar'
 Plug 'airblade/vim-gitgutter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-endwise'
-Plug 'neovim/node-host', { 'dir': '~/.vim/plugged/node-host', 'do': 'npm install' }
 " Plug 'eugen0329/vim-esearch' " Global search & replace
+Plug 'brooth/far.vim'
 Plug 'benmills/vimux'
 Plug 'tpope/vim-abolish'
 Plug 'romgrk/replace.vim'
@@ -209,16 +209,17 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 " Stole this from: https://github.com/Pancia/dotfiles/blob/master/nvim/ftplugin/clojure.vim
 let g:clojure_maxlines=300
 let g:clojure_align_multiline_strings=1
-let g:clojure_syntax_keywords = { 'clojureMacro': ['defui', 'facts', 'fact', 'specification', 'behavior', 'provided', 'assertions', 'provided', 'when-mocking', 'render', 'query', 'ident', 'start', 'stop', 'defsyntax', 'defsynfn', 'synfn', 'defspawner', 'defread', 'defmutation', 'defsc', 'defcard-fulcro', 'createFactory']
-                              \ , 'clojureFunc': ['helpers/root', 'prim/get-initial-state', 'prim/get-query', 'prim/computed', 'prim/transact!', 'utils/view->dom-style', 'prim/factory', 'clj->js', 'prim/children', 'dom/a', 'dom/article', 'dom/button', 'dom/code', 'dom/defs', 'dom/div', 'dom/footer', 'dom/form', 'dom/h1', 'dom/h2', 'dom/h4', 'dom/header', 'dom/hr', 'dom/img', 'dom/input', 'dom/label', 'dom/li', 'dom/linearGradient', 'dom/main', 'dom/nav', 'dom/node', 'dom/ol', 'dom/option', 'dom/p', 'dom/path', 'dom/polygon', 'dom/section', 'dom/select', 'dom/small', 'dom/span', 'dom/stop', 'dom/strong', 'dom/svg', 'dom/table', 'dom/tbody', 'dom/td', 'dom/textarea', 'dom/th', 'dom/thead', 'dom/tr', 'dom/ul', 'dom/fdef', 'dom/reduce', 'dom/merge', 'dom/row', 'dom/col', 'dom/icon', 'dom/colgroup']
-                              \ , 'clojureConstant': ['this']
-                              \ , 'clojureRepeat': ['js', '^.+Table.*']
+let g:clojure_syntax_keywords = { 'clojureMacro': ['defscreen', 'defui', 'facts', 'fact', 'specification', 'behavior', 'provided', 'assertions', 'provided', 'when-mocking', 'render', 'query', 'ident', 'id', 'start', 'stop', 'defsyntax', 'defsynfn', 'synfn', 'defspawner', 'defread', 'defmutation', 'defsc', 'defcard-fulcro', 'createFactory']
+                              \ , 'clojureFunc': ['prim/react-set-state!', 'gobj/get', 'gobj/set', 'prim/props', 'js->clj', 'df/load-action', 'df/remote-load', 'df/marker-table', 'prim/tempid', 'tr', 'trf', 'trc', 'helpers/root', 'prim/get-initial-state', 'prim/get-query', 'prim/computed', 'prim/transact!', 'utils/view->dom-style', 'prim/factory', 'clj->js', 'prim/children', 'dom/a', 'dom/article', 'dom/button', 'dom/code', 'dom/defs', 'dom/div', 'dom/footer', 'dom/form', 'dom/h1', 'dom/h2', 'dom/h4', 'dom/header', 'dom/hr', 'dom/img', 'dom/input', 'dom/label', 'dom/li', 'dom/linearGradient', 'dom/main', 'dom/nav', 'dom/node', 'dom/ol', 'dom/option', 'dom/p', 'dom/path', 'dom/polygon', 'dom/section', 'dom/select', 'dom/small', 'dom/span', 'dom/stop', 'dom/strong', 'dom/svg', 'dom/table', 'dom/tbody', 'dom/td', 'dom/textarea', 'dom/th', 'dom/thead', 'dom/tr', 'dom/ul', 'dom/fdef', 'dom/reduce', 'dom/merge', 'dom/row', 'dom/col', 'dom/icon', 'dom/colgroup']
+                              \ , 'clojureConstant': ['this', 'props', 'computed', 'st', 'state', 'env', 'component', 'ast']
+                              \ , 'clojureRepeat': ['js', '?', '^.+Table.*', '!']
+                              \ , 'clojureSpecial': ['action', 'remote', 'download']
                               \ }
 
 let g:clojure_fuzzy_indent = 1
 let g:clojure_fuzzy_indent_patterns = [ '^def.*', '^with.*', 'specification', 'behavior', 'assertions', 'component', 'provided', 'start', 'stop', 'letfn', '-tx$', 'transact!', '^check.*', '^assert.*', 'concat', '.*Exception.*', '.*Error.*', 'trace\|debug\|info\|warn\|error\|fatal', '.*->>\?$', 'either', 'synfn', 'parse.*', 'spawn-*', 'load-data.*', '!$', '^do', 'into', '^test-.*', '\..*', 'ui-*', 'a', 'article', 'button', 'code', 'defs', 'div', 'footer', 'form', 'h1', 'h2', 'h4', 'header', 'hr', 'img', 'input', 'label', 'li', 'linearGradient', 'main', 'nav', 'node', 'ol', 'option', 'p', 'path', 'polygon', 'section', 'select', 'small', 'span', 'stop', 'strong', 'svg', 'table', 'tbody', 'td', 'textarea', 'th', 'thead', 'tr', 'ul', 'fdef', 'reduce', 'merge', 'row', 'col', 'icon']
 let g:clojure_fuzzy_indent_blacklist = []
-let g:clojure_special_indent_words = join([ 'defrecord', 'defui', 'reify', 'letfn', 'extend-type', 'defprotocol', 'defmutation', ], ',')
+let g:clojure_special_indent_words = join([ 'defrecord', 'defscreen', 'defui', 'reify', 'letfn', 'extend-type', 'defprotocol', 'defmutation', ], ',')
 
 " Markdown-compatible tables
 let g:table_mode_corner='|'
