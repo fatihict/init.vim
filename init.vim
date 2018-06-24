@@ -26,6 +26,7 @@ Plug 'benmills/vimux'
 Plug 'tpope/vim-abolish'
 Plug 'romgrk/replace.vim'
 Plug 'radenling/vim-dispatch-neovim'
+Plug 'vim-syntastic/syntastic'
 
 " Clojure (<3)
 Plug 'SevereOverfl0w/vim-replant', { 'do': ':UpdateRemotePlugins' }
@@ -36,6 +37,7 @@ Plug 'guns/vim-sexp'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'clojure-vim/clj-refactor.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'clojure-vim/vim-jack-in'
+Plug 'aclaimant/syntastic-joker'
 
 call plug#end()
 
@@ -213,7 +215,7 @@ let g:clojure_syntax_keywords = { 'clojureMacro': ['defdialog', 'defscreen', 'de
                               \ , 'clojureFunc': ['prim/db->tree', 'forms/diff-form', 'forms-would-be-valid', 'forms/entity-xform', 'f/formatter', 'prim/ptransact!', 'forms/commit-state', 'prim/react-set-state!', 'gobj/get', 'gobj/set', 'prim/props', 'js->clj', 'df/load-action', 'df/remote-load', 'df/marker-table', 'prim/tempid', 'tr', 'trf', 'trc', 'helpers/root', 'prim/get-initial-state', 'prim/get-query', 'prim/get-ident', 'prim/computed', 'prim/transact!', 'utils/view->dom-style', 'prim/factory', 'clj->js', 'prim/children', 'dom/a', 'dom/article', 'dom/button', 'dom/code', 'dom/defs', 'dom/div', 'dom/footer', 'dom/form', 'dom/h1', 'dom/h2', 'dom/h4', 'dom/header', 'dom/hr', 'dom/img', 'dom/input', 'dom/label', 'dom/li', 'dom/linearGradient', 'dom/main', 'dom/nav', 'dom/node', 'dom/ol', 'dom/option', 'dom/p', 'dom/path', 'dom/polygon', 'dom/section', 'dom/select', 'dom/small', 'dom/span', 'dom/stop', 'dom/strong', 'dom/svg', 'dom/table', 'dom/tbody', 'dom/td', 'dom/textarea', 'dom/th', 'dom/thead', 'dom/tr', 'dom/ul', 'dom/fdef', 'dom/reduce', 'dom/merge', 'dom/row', 'dom/col', 'dom/icon', 'dom/colgroup']
                               \ , 'clojureConstant': ['this', 'props', 'computed', 'st', 'state', 'env', 'component', 'ast']
                               \ , 'clojureRepeat': ['js', '?', '^.+Table.*', '!']
-                              \ , 'clojureSpecial': ['action', 'remote', 'download']
+                              \ , 'clojureSpecial': ['action', 'refresh', 'remote', 'download']
                               \ }
 
 let g:clojure_fuzzy_indent = 1
@@ -320,3 +322,20 @@ function! CljfmtCurrentFile()
 endfunction
 
 nmap <LocalLeader><Space> :silent call CljfmtCurrentFile()<cr>
+
+nmap <LocalLeader>q I#?(:cljs(js/console.logkjlvlx$p
+nmap <LocalLeader>p I(printlnkjlx$p
+nmap <LocalLeader>k yiwPa kjbi:kj
+nmap <LocalLeader>c I#?(:cljskj>)
+nmap <LocalLeader>v I#?(:cljkj>)
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+let g:syntastic_clojure_checkers = ['joker']
